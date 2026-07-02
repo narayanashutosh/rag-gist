@@ -1,9 +1,10 @@
 import os
+
 from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters.character import CharacterTextSplitter
 from langchain_openai.embeddings import AzureOpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
+from langchain_text_splitters.character import CharacterTextSplitter
 
 load_dotenv()
 
@@ -26,5 +27,7 @@ if __name__ == "__main__":
     )
 
     print("Ingesting...")
-    PineconeVectorStore.from_documents(documents=texts, embedding=embeddings, index_name=os.environ["INDEX_NAME"])
+    PineconeVectorStore.from_documents(
+        documents=texts, embedding=embeddings, index_name=os.environ["INDEX_NAME"]
+    )
     print("Finished")
